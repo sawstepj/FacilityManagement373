@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="Base" />
+
+
+    <!-- Facility Beans -->
+
+    <bean id="units" class="Base.Model.Facility.Units" scope="prototype">
+        <constructor-arg index="0" value="SU"/>
+        <constructor-arg index="1" value="1"/>
+        <constructor-arg index="2" value="2"/>
+        <constructor-arg index="3" value="false"/>
+    </bean>
+    <bean id="laundry" class="Base.Model.Facility.Laundry" scope="prototype"/>
+    <bean id="gym" class="Base.Model.Facility.Gym" scope="prototype"/>
+    <bean id="date" class="Base.Model.Facility.Date" scope="prototype"/>
+
+    <bean id="floors" class="Base.Model.Facility.Floors" scope="prototype">
+        <constructor-arg index="0" value=" "/>
+        <constructor-arg index="1" value="2"/>
+        <constructor-arg index="2" value="2"/>
+        <property name="units" ref="units"/>
+    </bean>
+
+    <bean id="extraFacilities" class="Base.Model.Facility.ExtraFacilities" scope="prototype">
+        <property name="gym" ref="gym"/>
+        <property name="laundry" ref="laundry"/>
+    </bean>
+
+    <bean id="detail" class="Base.Model.Facility.Detail" scope="prototype">
+        <constructor-arg index="0" value="Sunny Apartments"/>
+        <constructor-arg index="1" value="5"/>
+        <constructor-arg index="2" value="10"/>
+    </bean>
+
+
+    <!-- Use Beans -->
+
+    <bean id="user" class="Base.Model.Use.User" scope="prototype"/>
+    <bean id="safetyInspection" class="Base.Model.Use.SafetyInspection" scope="prototype"/>
+    <bean id="employee" class="Base.Model.Use.Employee" scope="prototype"/>
+    <bean id="cleanInspection" class="Base.Model.Use.CleanInspection" scope="prototype"/>
+    <bean id="leases" class="Base.Model.Use.Leases" scope="prototype"/>
+
+    <bean id="tenant" class="Base.Model.Use.Tenant" scope="prototype">
+        <property name="user" ref="user"/>
+        <property name="employee" ref="employee"/>
+    </bean>
+
+    <bean id="useSchedule" class="Base.Model.Use.UseSchedule" scope="prototype">
+    </bean>
+
+    <bean id="inspection" class="Base.Model.Use.Inspection" scope="prototype">
+        <property name="safetyInspection" ref="safetyInspection"/>
+        <property name="cleanInspection" ref="cleanInspection"/>
+    </bean>
+
+    <bean id="leaseGroup" class="Base.Model.Use.LeaseGroup" scope="prototype">
+        <property name="leases" ref="leases"/>
+    </bean>
+    <bean id="Date" class="java.util.Date"/>
+    <bean id="location" class="Base.Model.Facility.Location">
+        <constructor-arg index="0" value="1"/>
+        <constructor-arg index="1" value="2"/>
+    </bean>
+    <!-- Maintenance Beans -->
+    <bean id="maintenance" class="Base.Model.Maintenance.MaintenanceSchedule" scope="prototype"/>
+    <bean id="cleaning" class="Base.Model.Maintenance.Cleaning" scope="prototype">
+        <constructor-arg index="0" value="1"/>
+        <constructor-arg index="1" value="clean"/>
+        <constructor-arg index="2" value="Tenant"/>
+        <constructor-arg index="3" value="2"/>
+        <constructor-arg index="4" ref="location"/>
+    </bean>
+
+    <bean id="gk" class="Base.Model.Maintenance.GroundsKeeping" scope="prototype">
+        <constructor-arg index="0" value="1"/>
+        <constructor-arg index="1" value="clean"/>
+        <constructor-arg index="2" value="Tenant"/>
+        <constructor-arg index="3" value="2"/>
+        <constructor-arg index="4" ref="location"/>
+    </bean>
+
+    <bean id="hvac" class="Base.Model.Maintenance.HVAC" scope="prototype">
+        <constructor-arg index="0" value="1"/>
+        <constructor-arg index="1" value="clean"/>
+        <constructor-arg index="2" value="Tenant"/>
+        <constructor-arg index="3" value="2"/>
+        <constructor-arg index="4" ref="location"/>
+    </bean>
+    <bean id="pc" class="Base.Model.Maintenance.PestControl" scope="prototype">
+        <constructor-arg index="0" value="1"/>
+        <constructor-arg index="1" value="clean"/>
+        <constructor-arg index="2" value="Tenant"/>
+        <constructor-arg index="3" value="2"/>
+        <constructor-arg index="4" ref="location"/>
+    </bean>
+    <bean id="plumbing" class="Base.Model.Maintenance.Plumbing" scope="prototype">
+        <constructor-arg index="0" value="1"/>
+        <constructor-arg index="1" value="clean"/>
+        <constructor-arg index="2" value="Tenant"/>
+        <constructor-arg index="3" value="2"/>
+        <constructor-arg index="4" ref="location"/>
+    </bean>
+
+    <bean id="maintenanceR" class="Base.Model.Maintenance.MaintenanceRequest" scope="prototype">
+        <constructor-arg index="0" value="0"/>
+        <constructor-arg index="1" value="Clean"/>
+        <constructor-arg index="2" value="Tenant"/>
+        <constructor-arg index="3" value="1"/>
+        <constructor-arg index="4" ref="location"/>
+    </bean>
+</beans>
